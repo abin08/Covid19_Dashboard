@@ -21,13 +21,17 @@ def get_dataframe(json_data):
     attributes_list = df['attributes'].tolist()
     attributes_df = pd.DataFrame(attributes_list)
     attributes_df = attributes_df.set_index('OBJECTID')
-    attributes_df['Last_Update'] = attributes_df['Last_Update'].apply(convert_time)
+    # attributes_df['Last_Update'] = attributes_df['Last_Update'].apply(convert_time)
     country_total_df = attributes_df.groupby("Country_Region", as_index=False).agg({
         "Confirmed": "sum",
         "Recovered": "sum",
         "Deaths": "sum"
     })
     return country_total_df
+
+
+def handle_missing_data(df):
+    pass
 
 
 def total_confirmed(df):
@@ -45,18 +49,21 @@ def total_deaths(df):
 def top_ten_confirmed(df):
     df_top_10 = df.nlargest(10, "Confirmed")
     df_top_10_confirmed = df_top_10[["Country_Region", "Confirmed"]]
-    return df_top_10_confirmed.set_index("Country_Region").to_json()   
+    df_top_10_confirmed.rename(columns={'Confirmed': 'Top_ten_confirmed'}, inplace=True)
+    return df_top_10_confirmed.set_index("Country_Region").to_json()
 
 
 def top_ten_recovered(df):
     df_top_10 = df.nlargest(10, "Recovered")
     df_top_10_recovered = df_top_10[["Country_Region", "Recovered"]]
+    df_top_10_recovered.rename(columns={'Recovered': 'Top_ten_recovered'}, inplace=True)
     return df_top_10_recovered.set_index("Country_Region").to_json()
 
 
 def top_ten_deaths(df):
     df_top_10 = df.nlargest(10, "Deaths")
     df_top_10_deaths = df_top_10[["Country_Region", "Deaths"]]
+    df_top_10_deaths.rename(columns={'Deaths': 'Top_ten_deaths'}, inplace=True)
     return df_top_10_deaths.set_index("Country_Region").to_json()
     
 
