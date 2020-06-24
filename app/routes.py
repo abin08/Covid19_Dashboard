@@ -5,7 +5,7 @@ from app import app
 from app import covid
 
 
-@app.route("/")
+@app.route("/dashboard")
 def dashboard():
     total_info = {}
     dataframe = covid.get_covid_data()
@@ -17,6 +17,8 @@ def dashboard():
     total_info['total_confirmed'] = int(covid.total_confirmed(dataframe))
     total_info['total_recovered'] = int(covid.total_recovered(dataframe))
     total_info['total_deaths'] = int(covid.total_deaths(dataframe))
+    total_info['total_active'] = total_info['total_confirmed'] - total_info['total_recovered'] - total_info['total_deaths']
+
     total_info = json.dumps(total_info)
     
     return render_template(
@@ -27,3 +29,12 @@ def dashboard():
         top_ten_deaths=top_ten_deaths
     )
 
+
+@app.route("/test")
+def test():
+    total_info = {}
+    dataframe = covid.get_covid_data()
+    
+    top_ten_confirmed = covid.top_ten_confirmed(dataframe).to_json()
+    
+    return top_ten_confirmed

@@ -3,18 +3,27 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Index</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='static/css/main.css'>
-    <script src='static/js/main.js'></script>
+    <link href="static/c3-0.7.18/c3.css" rel="stylesheet">
+    
+</head>
+<body>
     <script>
         var total_covid_info = {{ total_info | safe }}
         var top_ten_confirmed = {{ top_ten_confirmed | safe }}
         var top_ten_recovered = {{ top_ten_recovered | safe }}
         var top_ten_deaths = {{ top_ten_deaths | safe }}
     </script>
-</head>
-<body>
-    <p>Dashboard</p>
+    <div id="donut"></div>
+    <div id="bar1"></div>
+    <div id="bar2"></div>
+    <div id="bar3"></div>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="static/c3-0.7.18/c3.min.js"></script>
+    <script src='static/js/main.js'></script>
+    <script src='static/js/donut.js'></script>
+    <script src='static/js/bar.js'></script>
 </body>
 </html>

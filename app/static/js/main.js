@@ -1,10 +1,3 @@
-// var total_confirmed = {{ data.total_confirmed }}
-// var total_recovered = {{ data.total_recovered }}
-// var total_deaths = {{ data.total_deaths }}
-
-// console.log(total_confirmed)
-// console.log(total_recovered)
-// console.log(total_deaths)
-
-// var data = {{ total_info | safe }}
-// console.log(data)
+const ACTIVE_COLOR = '#f77f00'
+const RECOVERED_COLOR = '#1d3557'
+const DEATHS_COLOR = '#d62828'
