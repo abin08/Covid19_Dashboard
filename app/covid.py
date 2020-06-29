@@ -21,7 +21,6 @@ def get_dataframe(json_data):
     attributes_list = df['attributes'].tolist()
     attributes_df = pd.DataFrame(attributes_list)
     attributes_df = attributes_df.set_index('OBJECTID')
-    # attributes_df['Last_Update'] = attributes_df['Last_Update'].apply(convert_time)
     country_total_df = attributes_df.groupby("Country_Region", as_index=False).agg({
         "Confirmed": "sum",
         "Recovered": "sum",
@@ -46,28 +45,52 @@ def total_deaths(df):
     return df["Deaths"].sum()
 
 
-def top_ten_confirmed(df):
+def top_ten_confirmed_df(df):
     df_top_10 = df.nlargest(10, "Confirmed")
     df_top_10_confirmed = df_top_10[["Country_Region", "Confirmed"]]
-    df_top_10_confirmed.rename(columns={'Confirmed': 'Top_ten_confirmed'}, inplace=True)
-    return df_top_10_confirmed.set_index("Country_Region")
+    return df_top_10_confirmed
 
 
-def top_ten_recovered(df):
+def top_ten_recovered_df(df):
     df_top_10 = df.nlargest(10, "Recovered")
     df_top_10_recovered = df_top_10[["Country_Region", "Recovered"]]
-    df_top_10_recovered.rename(columns={'Recovered': 'Top_ten_recovered'}, inplace=True)
-    return df_top_10_recovered.set_index("Country_Region")
+    return df_top_10_recovered
 
 
-def top_ten_deaths(df):
+def top_ten_deaths_df(df):
     df_top_10 = df.nlargest(10, "Deaths")
     df_top_10_deaths = df_top_10[["Country_Region", "Deaths"]]
-    df_top_10_deaths.rename(columns={'Deaths': 'Top_ten_deaths'}, inplace=True)
-    return df_top_10_deaths.set_index("Country_Region")
+    return df_top_10_deaths
     
 
 def get_covid_data():
     covid_data = get_data()
     covid_dataframe = get_dataframe(covid_data)
     return covid_dataframe
+
+
+def get_top10_confirmed(df):
+    """ Returns top ten confirmed countries in json format"""
+    top_ten_confirmed = {}
+    df_top_ten_confirmed = top_ten_confirmed_df(df)
+    top_ten_confirmed['country'] = list(df_top_ten_confirmed['Country_Region'].values)
+    top_ten_confirmed['confirmed'] = list(map(lambda x: int(x), list(df_top_ten_confirmed['Confirmed'].values)))
+    return json.dumps(top_ten_confirmed)
+
+
+def get_top10_recovered(df):
+    """ Returns top ten recovered countries in json format"""
+    top_ten_recovered = {}
+    df_top_ten_recovered = top_ten_recovered_df(df)
+    top_ten_recovered['country'] = list(df_top_ten_recovered['Country_Region'].values)
+    top_ten_recovered['recovered'] = list(map(lambda x: int(x), list(df_top_ten_recovered['Recovered'].values)))
+    return json.dumps(top_ten_recovered)
+
+
+def get_top10_deaths(df):
+    """ Returns top ten deaths of countries in json format"""
+    top_ten_deaths = {}
+    df_top_ten_deaths = top_ten_deaths_df(df)
+    top_ten_deaths['country'] = list(df_top_ten_deaths['Country_Region'].values)
+    top_ten_deaths['deaths'] = list(map(lambda x: int(x), list(df_top_ten_deaths['Deaths'].values)))
+    return json.dumps(top_ten_deaths)
