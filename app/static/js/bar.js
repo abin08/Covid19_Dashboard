@@ -1,10 +1,16 @@
+let x_data = ['x']
+let recovered_data = ['Recovered']
+let confirmed_data = ['Confirmed']
+let deaths_data = ['Deaths']
+
+
 var top10_recovered_chart = c3.generate({
     bindto: '#bar1',
     data: {
         x: 'x',
         columns: [
-            ['x', 'USA', 'RUSSIA', 'UK', 'INDIA', 'UAE', 'AUS'],
-            ['Recovered', 32, 190, 110, 390, 123, 21]
+            x_data.concat(top_ten_recovered['country']),
+            recovered_data.concat(top_ten_recovered['recovered'])
         ],
         type: 'bar'
     },
@@ -33,8 +39,8 @@ var top10_active_chart = c3.generate({
     data: {
         x: 'x',
         columns: [
-            ['x', 'USA', 'RUSSIA', 'UK', 'INDIA', 'UAE', 'AUS'],
-            ['Active', 40, 220, 150, 300, 210, 180]
+            x_data.concat(top_ten_confirmed['country']),
+            confirmed_data.concat(top_ten_confirmed['confirmed'])
         ],
         type: 'bar'
     },
@@ -62,8 +68,8 @@ var top10_deaths_chart = c3.generate({
     data: {
         x: 'x',
         columns: [
-            ['x', 'USA', 'RUSSIA', 'UK', 'INDIA', 'UAE', 'AUS'],
-            ['Deaths', 299, 112, 167, 338, 189, 175]
+            x_data.concat(top_ten_deaths['country']),
+            deaths_data.concat(top_ten_deaths['deaths'])
         ],
         type: 'bar'
     },
