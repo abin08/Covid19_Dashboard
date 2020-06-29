@@ -11,11 +11,13 @@
 </head>
 <body>
     <script>
-        var total_covid_info = {{ total_info | safe }}
-        var top_ten_confirmed = {{ top_ten_confirmed | safe }}
-        var top_ten_recovered = {{ top_ten_recovered | safe }}
-        var top_ten_deaths = {{ top_ten_deaths | safe }}
+        let total_covid_info = {{ total_info | safe }}
+        let top_ten_confirmed = {{ top_ten_confirmed | safe }}
+        let top_ten_recovered = {{ top_ten_recovered | safe }}
+        let top_ten_deaths = {{ top_ten_deaths | safe }}
     </script>
+    <div style="text-align: center;color: dimgray;">COVID19 Dashboard</div>
+    <hr style="color: floralwhite;">
     <div id="donut"></div>
     <div id="bar1"></div>
     <div id="bar2"></div>
