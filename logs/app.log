@@ -1,0 +1,4 @@
+2020-06-30 12:09:17,775 DEBUG    Starting new HTTPS connection (1): services1.arcgis.com:443
+2020-06-30 12:09:19,549 DEBUG    https://services1.arcgis.com:443 "GET /0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/1/query?where=1%3D1&outFields=*&outSR=4326&f=json HTTP/1.1" 200 35375
+2020-06-30 12:09:19,675 INFO     Data fetched from API
+2020-06-30 12:09:19,710 INFO     Processed and created aggregations
