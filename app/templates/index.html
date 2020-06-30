@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Index</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='static/css/main.css'>
+    <link href="static/c3-0.7.18/c3.css" rel="stylesheet">
+    
+</head>
+<body>
+    <script>
+        let total_covid_info = {{ total_info | safe }}
+        let top_ten_confirmed = {{ top_ten_confirmed | safe }}
+        let top_ten_recovered = {{ top_ten_recovered | safe }}
+        let top_ten_deaths = {{ top_ten_deaths | safe }}
+    </script>
+    <div style="text-align: center;color: dimgray;">COVID19 Dashboard</div>
+    <hr style="color: floralwhite;">
+    <div id="donut"></div>
+    <br>
+    <br>
+    <div id="bar1"></div>
+    <br>
+    <br>
+    <div id="bar2"></div>
+    <br>
+    <br>
+    <div id="bar3"></div>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="static/c3-0.7.18/c3.min.js"></script>
+    <script src='static/js/main.js'></script>
+    <script src='static/js/donut.js'></script>
+    <script src='static/js/bar.js'></script>
+</body>
+</html>

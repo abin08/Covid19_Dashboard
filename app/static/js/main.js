@@ -1,0 +1,3 @@
+const ACTIVE_COLOR = '#f77f00'
+const RECOVERED_COLOR = '#1d3557'
+const DEATHS_COLOR = '#d62828'
