@@ -10,23 +10,33 @@
     <link href="static/c3-0.7.18/c3.css" rel="stylesheet">
     
 </head>
-<body>
-    <script>
-        let total_covid_info = {{ total_info | safe }}
-        let top_ten_confirmed = {{ top_ten_confirmed | safe }}
-        let top_ten_recovered = {{ top_ten_recovered | safe }}
-        let top_ten_deaths = {{ top_ten_deaths | safe }}
-    </script>
-    <div style="text-align: center;color: dimgray;">COVID19 Dashboard</div>
-    <hr style="color: floralwhite;">
-    
+<body>  
     <div class="container">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <div style="text-align: center;color: dimgray;">COVID19 Dashboard</div>
+            </div>
+            <div class="col-sm">
+                <div id="last-updated" style="float: right;color: gray; font-size: small;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <hr style="color: floralwhite;">
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm">
                 <div id="donut"></div>
             </div>
             <div class="col-sm">
                 <div id="bar1"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <br>
             </div>
         </div>
         <div class="row">
@@ -45,6 +55,14 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="static/c3-0.7.18/c3.min.js"></script>
     <script src='static/js/main.js'></script>
+    <script>
+        let total_covid_info = {{ total_info | safe }}
+        let top_ten_confirmed = {{ top_ten_confirmed | safe }}
+        let top_ten_recovered = {{ top_ten_recovered | safe }}
+        let top_ten_deaths = {{ top_ten_deaths | safe }}
+        let last_updated = total_covid_info['last_updated']
+        let elem = document.getElementById('last-updated').innerHTML = "Last Updated: " + last_updated
+    </script>
     <script src='static/js/donut.js'></script>
     <script src='static/js/bar.js'></script>
 </body>
