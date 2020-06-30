@@ -33,11 +33,14 @@ def get_dataframe(json_data):
         "Recovered": "sum",
         "Deaths": "sum"
     })
-    return country_total_df
+    last_update = convert_time(attributes_df['Last_Update'].unique()[0])
+    return country_total_df, last_update
 
 
-def handle_missing_data(df):
-    pass
+def get_covid_data():
+    covid_data = get_data()
+    covid_dataframe, last_updated = get_dataframe(covid_data)
+    return covid_dataframe, last_updated
 
 
 def total_confirmed(df):
@@ -69,12 +72,6 @@ def top_ten_deaths_df(df):
     df_top_10_deaths = df_top_10[["Country_Region", "Deaths"]]
     return df_top_10_deaths
     
-
-def get_covid_data():
-    covid_data = get_data()
-    covid_dataframe = get_dataframe(covid_data)
-    return covid_dataframe
-
 
 def get_top10_confirmed(df):
     """ Returns top ten confirmed countries in json format"""
