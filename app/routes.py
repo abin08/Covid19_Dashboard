@@ -1,6 +1,7 @@
 import json
 from flask import make_response
 from flask import render_template
+from flask import jsonify
 from app import app
 from app import covid
 
@@ -8,6 +9,7 @@ from app import covid
 @app.route("/")
 def dashboard():
     total_info = {}
+
     dataframe = covid.get_covid_data()
     
     top_ten_confirmed = covid.get_top10_confirmed(dataframe)
@@ -20,7 +22,7 @@ def dashboard():
     total_info['total_active'] = total_info['total_confirmed'] - total_info['total_recovered'] - total_info['total_deaths']
 
     total_info = json.dumps(total_info)
-    
+    app.logger.info("Processed and created aggregations")
     return render_template(
         "index.html", 
         total_info=total_info, 
