@@ -1,3 +1,4 @@
+from app import app
 import pandas as pd
 import requests
 import json
@@ -7,8 +8,14 @@ DATA_URL = "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/C
 
 
 def get_data():
-    response = requests.get(DATA_URL).json()
-    return response['features']
+    response = {}
+    try:
+        response = requests.get(DATA_URL).json()
+        app.logger.info("Data fetched from API")
+    except requests.exceptions.RequestException as e:
+        app.logger.error(e)
+
+    return response.get('features', None)
 
 
 def convert_time(t):
