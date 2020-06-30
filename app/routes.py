@@ -10,12 +10,12 @@ from app import covid
 def dashboard():
     total_info = {}
 
-    dataframe = covid.get_covid_data()
-    
+    dataframe, last_updated = covid.get_covid_data()
     top_ten_confirmed = covid.get_top10_confirmed(dataframe)
     top_ten_recovered = covid.get_top10_recovered(dataframe)
     top_ten_deaths = covid.get_top10_deaths(dataframe)
     
+    total_info['last_updated'] = str(last_updated)
     total_info['total_confirmed'] = int(covid.total_confirmed(dataframe))
     total_info['total_recovered'] = int(covid.total_recovered(dataframe))
     total_info['total_deaths'] = int(covid.total_deaths(dataframe))
