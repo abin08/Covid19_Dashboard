@@ -2,9 +2,9 @@ var chart1 = c3.generate({
     bindto: '#donut',
     data: {
         columns: [
-            ['Total Active', total_covid_info['total_active']],
-            ['Total Recovered',  total_covid_info['total_recovered']],
-            ['Total Deaths',  total_covid_info['total_deaths']]
+            ['Active', total_covid_info['total_active']],
+            ['Recovered',  total_covid_info['total_recovered']],
+            ['Deaths',  total_covid_info['total_deaths']]
         ],
         type : 'donut',
         onclick: function (d, i) { console.log("onclick", d, i); },
@@ -12,9 +12,13 @@ var chart1 = c3.generate({
         onmouseout: function (d, i) { console.log("onmouseout", d, i); }
     },
     donut: {
-        title: "Global Status"
+        title: "Total Cases: " + numberWithCommas(total_covid_info['total_confirmed'])
     },
     color: {
         pattern: [ACTIVE_COLOR, RECOVERED_COLOR, DEATHS_COLOR]
     }
 });
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
